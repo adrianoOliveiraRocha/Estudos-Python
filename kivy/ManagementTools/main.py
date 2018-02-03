@@ -4,7 +4,7 @@ kivy.require("1.9.0")
 from kivy.app import App
 from screens.login import LoginSceen
 from kivy.uix.anchorlayout import AnchorLayout
-from kivy.uix.label import Label
+
 
 class MainScreen(AnchorLayout):
     pass

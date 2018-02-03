@@ -15,7 +15,6 @@ Builder.load_string("""
     #foreground_color: [1, 0.9, 1, 1]
     font_size: '20sp'
     
-    
 <LoginSceen>:
     orientation: 'vertical'
     size_hint: (0.5, 0.5)
