@@ -1,19 +1,9 @@
 # -*- coding: utf-8 -*-
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
+from custom_widgets import Title, MyTextInput, MyButton
 
 Builder.load_string("""
-<Title@Label>:
-    size: self.texture_size
-    font_size: '50sp'
-    #text_size: root.width, root.height
-    #ellipsis_options: {'color':(1,0.5,0.5,1),'underline':True}
-
-<MyTextInput@TextInput>:
-    multiline: False
-    background_color: [0.8, 0.9, 1, 1]
-    #foreground_color: [1, 0.9, 1, 1]
-    font_size: '20sp'
     
 <LoginSceen>:
     orientation: 'vertical'
@@ -24,32 +14,40 @@ Builder.load_string("""
     anchor_y: 'center'
     id: inputs
     
-    Title:
-        #text: '[color=3344ff]Bem Vindo![/color]'
-        text: 'Bem Vindo!'
-        markup: True
-
-    MyTextInput:
-        id: email
-        hint_text: 'Seu e-mail aqui'
-        
-    MyTextInput:
-        id: password
-        hint_text: 'Sua senha aqui'
-        password: True
-        
-    BoxLayout:
-        id: buttons
-        spacing: 10
-        orientation: 'horizontal'
-        Button:
-            id: login
-            text: 'Login'
-        Button:
-            id: register
-            text: 'Cadastro'
-            on_press: app.action_btn('register')
+    
 """)
 
 class LoginSceen(BoxLayout):
-    pass
+    def __init__(self, *args, **kwargs):
+        super(LoginSceen, self).__init__(*args, **kwargs)
+        self.app = kwargs['app']
+        self.add_widget(Title(text='Bem Vindo!'))
+        self.add_widget(MyTextInput(
+            hint_text='Seu e-mail',
+            id='email'
+        ))
+        self.add_widget(MyTextInput(
+            hint_text='Sua senha',
+            id='senha',
+            password=True
+        ))
+        self.add_widget(self.createButtons())
+    
+    def createButtons(self):
+        boxButtons = BoxLayout(id='boxButtons')
+        btn_login = MyButton(
+            id='btn_login',
+            text='Login'
+        )
+        btn_register = MyButton(
+            id='call_form',
+            text='Cadastrar-se',
+            on_press=self.app.action_btn
+        )
+        boxButtons.add_widget(btn_login)
+        boxButtons.add_widget(btn_register)
+        return boxButtons
+    
+    
+        
+        
