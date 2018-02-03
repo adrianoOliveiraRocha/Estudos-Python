@@ -14,13 +14,16 @@ Builder.load_string("""
     anchor_y: 'center'
     id: inputs
     
-    
 """)
 
 class LoginSceen(BoxLayout):
     def __init__(self, *args, **kwargs):
         super(LoginSceen, self).__init__(*args, **kwargs)
         self.app = kwargs['app']
+        self.createInputs()
+        self.add_widget(self.createButtons())
+    
+    def createInputs(self):
         self.add_widget(Title(text='Bem Vindo!'))
         self.add_widget(MyTextInput(
             hint_text='Seu e-mail',
@@ -28,10 +31,9 @@ class LoginSceen(BoxLayout):
         ))
         self.add_widget(MyTextInput(
             hint_text='Sua senha',
-            id='senha',
+            id='password',
             password=True
         ))
-        self.add_widget(self.createButtons())
     
     def createButtons(self):
         boxButtons = BoxLayout(id='boxButtons')
