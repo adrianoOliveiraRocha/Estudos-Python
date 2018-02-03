@@ -9,5 +9,3 @@ class User:
         if ' ' in password:
             print('Have white space')
         self.password = password
-
-        

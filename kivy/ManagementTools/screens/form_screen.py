@@ -7,7 +7,7 @@ Builder.load_string("""
     
 <FormSceen>:
     orientation: 'vertical'
-    size_hint: (0.5, 0.5)
+    size_hint: (0.6, 0.6)
     spacing: 30
     pos_hint: {'center_x': .5, 'center_y': .5}
     anchor_x: 'center'
