@@ -13,11 +13,20 @@ def printer(name):
 
 loop = asyncio.get_event_loop()
 
+# Call a function at a specific time related to the output of loop.time .
+# Every integer after loop.time adds a second
 result = loop.call_at(loop.time() + .2, printer, 'call_at')
-result = loop.call_later(.1, printer, 'call_later')
-result = loop.call_soon(printer, 'call_soon')
-result = loop.call_soon_threadsafe(printer, 'call_soon_threadsafe')
 
+# Call the function after the given number of seconds
+result = loop.call_later(.1, printer, 'call_later')
+
+# Add an item to the end of the (FIFO) queue
+result = loop.call_soon(printer, 'call_soon')
+
+# This is the same as call_soon except for being
+# thread safe
+result = loop.call_soon_threadsafe(printer, 'call_soon_threadsafe')
+# Make sure we stop after a second
 result = loop.call_later(1, loop.stop)
 
 loop.run_forever()
