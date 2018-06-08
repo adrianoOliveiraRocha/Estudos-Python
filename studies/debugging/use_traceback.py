@@ -6,7 +6,7 @@ class Spam(object):
     
     def run(self):
         print('Before stack print')
-        traceback.print_stack()
+        traceback.print_stack(limit=-1)
         print('After stack print')
 
 
