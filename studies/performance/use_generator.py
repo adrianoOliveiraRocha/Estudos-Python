@@ -37,6 +37,7 @@ print(sum_of_first_n)
 
 #now, we gonna do it with generator
 def firstn(n):
+    num = 0
     while num < n:
         yield num
         num += 1
