@@ -1,15 +1,23 @@
 # -*- coding: utf-8 -*-
-from nltk.tokenize import sent_tokenize, word_tokenize, WordPunctTokenizer
+from nltk.stem.porter import PorterStemmer
+from nltk.stem.lancaster import LancasterStemmer
+from nltk.stem.snowball import SnowballStemmer
 
+input_words = ['writing', 'calves', 'be', 'branded', 
+               'horse', 'randomize', 'possibly', 
+               'provision', 'hospital', 'kept', 
+               'scratchy', 'code']
 
-input_text = "Do you know how tokenization works? It's actually quite "\
-"interesting! Let's analyze a couple of sentences and figure it out."
+porter = PorterStemmer()
+lancaster = LancasterStemmer()
+snowball = SnowballStemmer('english')
 
-print('\nSentence Tokenizer:')
-print(sent_tokenize(input_text))
+stemmer_names = ['PORTER', 'LANCASTER', 'SNOWBALL']
+formatted_text = '{:>16}' * (len(stemmer_names) + 1)
+print('\n', formatted_text.format('INPUT WORD', *stemmer_names),
+      '\n', '='*68)
 
-print('\nWord Tokenizer')
-print(word_tokenize(input_text))
-
-print('\nWord punct tokenizer:')
-print(WordPunctTokenizer().tokenize(input_text))
+for word in input_words:
+    output = [word, porter.stem(word), 
+              lancaster.stem(word), snowball.stem(word)]
+    print(formatted_text.format(*output))
