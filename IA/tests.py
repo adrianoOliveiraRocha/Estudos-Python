@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+b# -*- coding: utf-8 -*-
 from nltk.stem.porter import PorterStemmer
 from nltk.stem.lancaster import LancasterStemmer
 from nltk.stem.snowball import SnowballStemmer
