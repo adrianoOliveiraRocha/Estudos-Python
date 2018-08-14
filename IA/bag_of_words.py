@@ -23,7 +23,6 @@ chunk_names = []
 for i in range(len(text_chunks)):
 	chunk_names.append("Chunk-" + str(i+1))
 
-
 print("\nDocument term matrix")
 formatted_text = '{:>12}' * (len(chunk_names) + 1)
 
