@@ -23,10 +23,13 @@ train_tfidf = tfidf.fit_transform(train_tc)
 
 # Define test data
 input_data = [
+	'Você precisa ser cuidadose com carros quando você está dirigindo sobre uma estrada escorregadia',
 	'You need to be careful with cars when you are driving on slippery roads',
 	'A lot of devices can be operated wirelessly',
 	'Players need to be careful when they are close to goal posts',
-	'Political debates help us understand the perspectives of both sides'
+	'Political debates help us understand the perspectives of both sides',
+	'Eu nunca me interessei pelo estuda da eletrônica',
+	'Eu sou analista de Sistemas',
 ]
 
 classifier = MultinomialNB().fit(train_tfidf, training_data.target)
