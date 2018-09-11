@@ -8,7 +8,7 @@ else:
     print('Not a match')
 
 # Wild Card Characters: Special Characters
-# . - You can use it when you don't know which letter exists in this position
+# \. - You can use it when you don't know which letter exists in this position
 re.search(r'P.thon Program.er', 'Python Programmer').group()
 
 # \w - Lowercase w. Matches any single letter, digit or underscore.
@@ -22,9 +22,6 @@ re.search(r'Python\sProgrammer', 'Python Programmer').group()
 
 # \S - Uppercase s. Matches any character not part of \s (lowercase s)
 re.search(r'Python Programm\Sr', 'Python Programmer').group()
-
-# \t - Lowercase t. Matches tab
-re.search(r'Python\tProgrammer', 'Python    Programmer').group()
 
 # \t - Lowercase t. Matches tab
 re.search(r'Python\tProgrammer', 'Python    Programmer').group()
@@ -49,4 +46,45 @@ re.search(r'Python Program[mrf]er', 'Python Programmer').group()
 # are not in the set will be matched
 re.search(r'number [0-6]', 'number 5').group()
 
-# https://www.datacamp.com/community/tutorials/python-regular-expression-tutorial?utm_source=adwords_ppc
+# Matches any character except 5
+re.search(r'Number: [^5]', 'Number: 0').group()
+
+# \A - Uppercase a. Matches only at the start of the string. Works across multiple lines as well
+re.search(r'\A[A-E]ookie', 'Cookie').group()
+
+"""
+\ - Backslash. If the character following the backslash is a recognized escape
+character, then the special meaning of the term is taken. For example,
+\n is considered as newline. However, if the character following the \
+is not a recognized escape character, then the \ is treated like any other
+character and passed through.
+"""
+
+# This checks for '\' in the string instead of '\t' due to the '\' used
+re.search(r'Back\\stail', 'Back\stail').group()
+
+# This treats '\s' as an escape character because it lacks '\' at the start of '\s'
+re.search(r'Back\stail', 'Back tail').group()
+
+# + - Checks for one or more characters to its left
+re.search(r'Co+kie', 'Cooookie').group()
+
+# * - Checks for zero or more characters to its left
+re.search(r'Ca*o*kie', 'Caokie').group()
+
+# ? - Checks for exactly zero or one character to its left.
+re.search(r'Colou?r', 'Color').group()
+
+# {x} - Repeat exactly x number of times.
+# {x,} - Repeat at least x times or more
+# {x, y} - Repeat at least x times but no more than y times
+re.search(r'\d{9,10}', '0987654321').group()
+
+# Example email
+email_address = 'Please contact us at: support@datacamp.com'
+match = re.search(r'([\w\.-]+)@([\w\.-]+)', email_address)
+
+if email_address:
+    print(match.group())
+    print(match.group(1))
+    print(match.group(2))
