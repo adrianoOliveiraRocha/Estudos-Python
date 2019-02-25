@@ -1,5 +1,9 @@
-seasons = ['Spring', 'Summer', 'Fall', 'Winter']
+from sklearn.datasets import fetch_20newsgroups
+groups = fetch_20newsgroups()
+import seaborn as sns
+sns.distplot(groups.target)
 
-for x, y in enumerate(seasons):
-	print(x)
-	print(y)
+import matplotlib.pyplot as plt
+plt.show()
+
+
