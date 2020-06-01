@@ -5,7 +5,7 @@ class Phrase:
 	def save(self):
 		import sqlite3
 		try:
-			conn = sqlite3.connect('db/ep.db')
+			conn = sqlite3.connect('/home/adriano/python/pygit/en-phrases/db/ep.db')
 			c = conn.cursor()
 			c.execute("""INSERT INTO phrase (phrase) 
              values('{}')""".format(self.phrase))
