@@ -26,6 +26,7 @@ class Application(Frame):
         self.master.config(menu=menubar)
         phraseMenu = Menu(menubar)
         phraseMenu.add_command(label="New Phrase", command=self.newPhrase)
+        phraseMenu.add_command(label="Give a Phrase", command=self.getOnePhrase)
         phraseMenu.add_command(label="Exit", command=self.onExit)
         menubar.add_cascade(label="Pharase", menu=phraseMenu)
         
@@ -46,6 +47,65 @@ class Application(Frame):
                 self.insertFrame, width=100, textvariable=self.phraseVariable)
             self.enterPhrase.pack(side=RIGHT, padx=50, pady=5)          
         
+    def getOnePhrase(self):
+        self.messageLabel.destroy() 
+        from modules.models import Phrase
+        error, phrase = Phrase.getOnePhrase()
+        if error is not None:
+            try:                
+                if self.phraseFrame.winfo_exists() == 1:
+                    self.phraseFrame.destroy()
+                    self.messageLabel.destroy()
+                    self.messageLabel = Label(self.frame, 
+                                    text="NO PHRASES", width=200)
+                    self.messageLabel.pack(side=TOP, pady=200, padx=400)
+                    try: 
+                        self.markAsChecked(phrase[0])
+                    except Exception as e:
+                        print(e)
+            except Exception as e:
+                self.messageLabel = Label(self.frame, 
+                                text="NO PHRASES", width=200)
+                self.messageLabel.pack(side=TOP, pady=200, padx=400)
+                try: 
+                    self.markAsChecked(phrase[0])
+                except Exception as e:
+                    print(e)
+                
+        else:
+            try:
+                if self.phraseFrame.winfo_exists() == 1:
+                    self.messageLabel.destroy()
+                    self.messageLabel = Label(self.phraseFrame, 
+                                    text=phrase[1], width=100)
+                    self.messageLabel.pack(side=RIGHT, padx=50, pady=5)
+                    try: 
+                        self.markAsChecked(phrase[0])
+                    except Exception as e:
+                        print(e)
+            except Exception as e:
+                self.phraseFrame = Frame(self.frame, relief=RAISED, borderwidth=5)
+                self.phraseFrame.pack(side=TOP, padx=100, pady=200)
+                self.speakButton = Button(
+                    self.phraseFrame, text="Speak!", command=self.speak)
+                self.speakButton.pack(side=LEFT, padx=5, pady=5)
+                self.messageLabel = Label(self.phraseFrame, 
+                                    text = phrase[1], 
+                                    width=100)
+                self.messageLabel.pack(side=RIGHT, padx=50, pady=5)
+                try: 
+                    self.markAsChecked(phrase[0])
+                except Exception as e:
+                    print(e)
+                
+                
+    
+    def speak(self):
+        print('speak!');
+    
+    def markAsChecked(self, id):
+        from modules.models import Phrase
+        Phrase.markAsChecked(id)
     
     def onExit(self):
         self.quit()
