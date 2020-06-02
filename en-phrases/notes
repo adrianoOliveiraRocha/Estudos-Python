@@ -1,0 +1,14 @@
+I created a virtual machine with this commend: python3 -m venv ep
+Inorder by activate the virtual enviroment use: source bin/activate
+
+About virtualenv:
+The script virtualenv is installed in '/home/adriano/.local/bin' which is not on PATH.
+Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+
+from gtts import gTTS
+import os
+tts = gTTS(text='Good morning', lang='en')
+tts.save("good.mp3")
+os.system("mpg321 good.mp3")
+
+For pytts: pip install pyttsx3

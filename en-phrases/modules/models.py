@@ -15,6 +15,20 @@ class Phrase:
 		except Exception as e:
 			print(e)
 			return False
+
+	@staticmethod
+	def init():
+		import sqlite3
+		try:
+			conn = sqlite3.connect('/home/adriano/python/pygit/en-phrases/db/ep.db')
+			c = conn.cursor()
+			c.execute("update phrase set checked=0")
+			conn.commit()
+			conn.close()
+			
+		except Exception as e:
+			print(e)
+
             
 	@staticmethod
 	def getAllPhrases():
@@ -64,5 +78,6 @@ class Phrase:
 			conn.close()
 		except Exception as e:
 			print(e)
+
  
 		

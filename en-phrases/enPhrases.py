@@ -14,6 +14,7 @@ class Application(Frame):
     def initUI(self):        
         self.frame = Frame(self, relief=RAISED, borderwidth=5)
         self.frame.pack(fill=BOTH, expand=True)
+        self.currentPhrase = None
         
         self.insertMenuBar()
         self.insertLabels()
@@ -27,6 +28,7 @@ class Application(Frame):
         phraseMenu = Menu(menubar)
         phraseMenu.add_command(label="New Phrase", command=self.newPhrase)
         phraseMenu.add_command(label="Give a Phrase", command=self.getOnePhrase)
+        phraseMenu.add_command(label="Init", command=self.init)
         phraseMenu.add_command(label="Exit", command=self.onExit)
         menubar.add_cascade(label="Pharase", menu=phraseMenu)
         
@@ -73,6 +75,7 @@ class Application(Frame):
                     print(e)
                 
         else:
+            self.currentPhrase = phrase[1]
             try:
                 if self.phraseFrame.winfo_exists() == 1:
                     self.messageLabel.destroy()
@@ -101,7 +104,16 @@ class Application(Frame):
                 
     
     def speak(self):
-        print('speak!');
+        print(self.currentPhrase)
+        from gtts import gTTS
+        import os
+        tts = gTTS(self.currentPhrase, lang='en')
+        tts.save('audio/phrase.mp3')
+        os.system('mpg123 audio/phrase.mp3')
+    
+    def init(self):
+        from modules.models import Phrase
+        Phrase.init()        
     
     def markAsChecked(self, id):
         from modules.models import Phrase
