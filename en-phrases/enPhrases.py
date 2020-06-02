@@ -107,7 +107,7 @@ class Application(Frame):
         print(self.currentPhrase)
         from gtts import gTTS
         import os
-        tts = gTTS(self.currentPhrase, lang='en')
+        tts = gTTS(self.currentPhrase, lang='en-au')
         tts.save('audio/phrase.mp3')
         os.system('mpg123 audio/phrase.mp3')
     
