@@ -57,7 +57,7 @@ class Phrase:
               	where checked=0
                	order by rowid asc limit 1""")
 			phrase = c.fetchone() 
-			print(phrase[1])
+			# print(phrase[1])
 			if phrase[1] is None:
 				raise Exception("You don't have a phrase")
 			conn.commit()
