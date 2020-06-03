@@ -12,3 +12,10 @@ tts.save("good.mp3")
 os.system("mpg321 good.mp3")
 
 For pytts: pip install pyttsx3
+
+
+from gtts import gTTS
+import os
+tts = gTTS(self.currentPhrase, lang='en-au')
+tts.save('audio/phrase.mp3')
+os.system('mpg123 audio/phrase.mp3')
